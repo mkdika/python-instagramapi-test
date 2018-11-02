@@ -5,13 +5,6 @@ from random import randint
 from datetime import datetime
 import time
 
-# CONFIGURATION
-# =============
-
-# refresh feed interval
-SLEEP_TIME = 420  # 7 minute
-
-
 count = 0
 
 print("=================")
@@ -61,13 +54,12 @@ while(True):
     for item in media:
         # print all payload from new feeds
         # pp.pprint(item)
+        print("======================================================")
         if item['has_liked']:
             print("Post ID {0} has been liked.".format(item['id']))
         else:
             ts = int(int(item['device_timestamp'])/1000000)
             local_time = time.localtime(ts)
-            print(
-                "=================================================================")
             print("Post ID           : {0}".format(item['id']))
             print("Post Time (Local) : {0}".format(
                 time.strftime("%d-%m-%Y %H:%M", local_time)))
@@ -88,11 +80,13 @@ while(True):
                 item['caption']['text'] or 'No caption!'))
             hasLiked = api.like(item['id'])
             if hasLiked:
-                print('>> You just liked this post!')
+                print(">> You just liked this post at {0}".format(
+                    time.strftime("%d-%m-%Y %H:%M", time.localtime())))
                 TARGET['media_like'].append(item['id'])
                 count = count + 1
                 print(">> Total auto post like : {0}".format(count))
-                time.sleep(randint(100, 150))
+                time.sleep(randint(70, 100))
 
     # to delay the next query, in order to prevent from banned.
-    time.sleep(SLEEP_TIME)
+    time.sleep(randint(350, 400))
+    print("======================================================")
