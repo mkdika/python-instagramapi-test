@@ -9,7 +9,7 @@ count = 0
 
 print("=================")
 print("I N S T A G R A M")
-print("  Auto Like Bot  ")
+print(" Auto Like Post! ")
 print("=================")
 
 pp = PrettyPrinter(indent=2)
