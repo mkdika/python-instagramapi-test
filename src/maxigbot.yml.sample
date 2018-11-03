@@ -1,0 +1,20 @@
+# This is example configuration file.
+# To use this file as your use case, edit value as yours,
+# then rename file to 'maxigbot.yml'
+
+maxigbot:
+    auto-like-post:
+        account:
+            -
+                username: john.doe.deo
+                password: secret123
+                target-user:
+                    - targetuserid1
+                    - targetuserid2
+            -
+                username: foo.bar
+                password: secret123
+                target-user:
+                    - targetuserid1
+                    - targetuserid2
+                    - targetuserid3
