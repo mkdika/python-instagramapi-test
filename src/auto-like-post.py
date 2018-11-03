@@ -99,8 +99,10 @@ for user in list_user:
                     print(
                         "Sample Image URL  :\n\t*  {0}".format(item['image_versions2']['candidates'][1]['url']))
 
-                print("Post caption      : {0}".format(
-                    item['caption']['text'] or 'No caption!'))
+                if item['caption'] != None:
+                    print("Post caption      : {0}".format(
+                        item['caption']['text'] or 'No caption!'))
+
                 hasLiked = api.like(item['id'])
                 if hasLiked:
                     print(">> You just liked this post at {0}".format(
