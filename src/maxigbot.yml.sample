@@ -21,3 +21,12 @@ maxigbot:
     most-follower:
         username: john.doe
         password: secret123
+    send-mail:
+        smtp_ssl_host: smtp.gmail.com
+        smtp_ssl_port: 465
+        username: johndoe@gmail.com
+        password: secret123
+        sender: johndoe@gmail.com
+        target-address:
+            - mkdika@gmail.com
+            - foobar@gmail.com

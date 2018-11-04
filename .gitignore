@@ -92,3 +92,4 @@ media/
 
 src/*.yml
 src/test.py
+tmp/

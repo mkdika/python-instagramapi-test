@@ -131,6 +131,7 @@ for user in list_user:
     fin_user = fin_user + 1
 
     if fin_user < len(list_user):
+        api.logout()
         wait_next_user = randint(30, 45)
         print(">> Wait {0} secs for next IG user process.\n".format(
             wait_next_user))

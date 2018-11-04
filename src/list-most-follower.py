@@ -7,6 +7,8 @@ import time
 import yaml
 import os
 
+# The result will generated into tmp/ folder
+
 pp = PrettyPrinter(indent=2)
 
 d1 = int(time.time())
@@ -38,27 +40,52 @@ USERX['user_data'] = api.LastJson['user']
 
 api.getUserFollowings(str(USERX['user_data']['pk']))
 foll = api.LastJson
+print("Total following: {0}".format(len(foll['users'])))
+
+total_following = len(foll['users'])
+processed = 0
 
 following = []
 for foll_user in foll['users']:
+
     uname = foll_user['username']
     u = {}
-
     api.searchUsername(uname)
-    tuser = api.LastJson['user']
 
-    if tuser['is_verified']:
-        u['pk'] = tuser['pk']
-        u['username'] = uname
-        u['follower'] = tuser['follower_count']
-        u['following'] = tuser['following_count']
-        u['verified'] = tuser['is_verified']
-        following.append(u)
+    result = api.LastJson
 
-print("Total count: {0}".format(len(following)))
-# sort by follower Descending
+    if result != None and 'user' in result:
+        tuser = result['user']
+
+        if tuser['is_verified']:
+            # u['pk'] = tuser['pk']                         # primary key
+            u['username'] = uname                           # username
+            u['follower'] = tuser['follower_count']         # follower total
+            # u['following'] = tuser['following_count']     # following total
+            # u['verified'] = tuser['is_verified']          # is verified
+            following.append(u)
+
+    processed = processed + 1
+    complete = (processed/total_following) * 100
+    print("Processed '{0}'\n\t\t\t\t\t\tComplete: {1}% ({2}/{3})".format(
+        uname,
+        round(complete, 2),
+        processed,
+        total_following))
+
+    # delay for next user inquiry
+    # to prevent from being blocked or banned.
+    time.sleep(randint(1, 2))  # seconds
+
+# logout account
+api.logout()
+
+# # sort by follower Descending
 newlist = sorted(following, key=itemgetter('follower'), reverse=True)
-pp.pprint(newlist)
+
+with open('tmp/follower.txt', 'w') as f:
+    for tuser in newlist:
+        f.write("{0},{1}\n".format(tuser['username'], tuser['follower']))
 
 # Footer process
 d2 = int(time.time())
