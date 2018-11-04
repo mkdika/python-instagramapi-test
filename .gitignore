@@ -91,3 +91,4 @@ local_settings.py
 media/
 
 src/*.yml
+src/test.py
