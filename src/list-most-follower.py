@@ -7,6 +7,7 @@ import time
 import yaml
 import os
 
+# This Python script is to list down all your following's followers
 # The result will generated into tmp/ folder
 
 pp = PrettyPrinter(indent=2)
@@ -58,7 +59,7 @@ for foll_user in foll['users']:
         tuser = result['user']
 
         if tuser['is_verified']:
-            # u['pk'] = tuser['pk']                         # primary key
+            u['pk'] = tuser['pk']                         # primary key
             u['username'] = uname                           # username
             u['follower'] = tuser['follower_count']         # follower total
             # u['following'] = tuser['following_count']     # following total
@@ -85,7 +86,10 @@ newlist = sorted(following, key=itemgetter('follower'), reverse=True)
 
 with open('tmp/follower.txt', 'w') as f:
     for tuser in newlist:
-        f.write("{0},{1}\n".format(tuser['username'], tuser['follower']))
+        f.write("{0},{1},{2}\n"
+                .format(tuser['username'],
+                        tuser['pk'],
+                        tuser['follower']))
 
 # Footer process
 d2 = int(time.time())

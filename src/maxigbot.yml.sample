@@ -21,6 +21,10 @@ maxigbot:
     most-follower:
         username: john.doe
         password: secret123
+    follow-unfollow:
+        username: john.doe
+        password: secret123
+        target-path: tmp/follower.txt
     send-mail:
         smtp_ssl_host: smtp.gmail.com
         smtp_ssl_port: 465

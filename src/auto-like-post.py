@@ -8,6 +8,7 @@ import time
 import yaml
 import os
 
+# Auto like user IG post by given list
 
 pp = PrettyPrinter(indent=2)
 count = 0
